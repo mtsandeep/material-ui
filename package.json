@@ -4,7 +4,7 @@
   "author": "Call-em-all Engineering Team",
   "version": "0.16.0",
   "description": "React Components that Implement Google's Material Design.",
-  "main": "./src/index.js",
+  "main": "./build/index.js",
   "keywords": [
     "react",
     "react-component",
@@ -23,12 +23,12 @@
   "scripts": {
     "build": "npm run build:icon-index && npm run build:babel && npm run build:copy-files",
     "build:icon-index": "babel-node ./scripts/icon-index-generator.js",
-    "build:babel": "NODE_ENV=release babel ./src --out-dir ./build --ignore spec.js",
+    "build:babel": "babel ./src --out-dir ./build --ignore spec.js",
     "build:copy-files": "babel-node ./scripts/copy-files.js",
     "clean:build": "rimraf build",
     "lint": "eslint src docs/src test --quiet && echo \"eslint: no lint errors\"",
     "lint:find-rules": "eslint-find-rules -u .eslintrc.js",
-    "prebuild": "npm run clean:build",
+    "postinstall": "npm run build",
     "test": "cross-env NODE_ENV=test babel-node test/index.js",
     "test:coverage": "cross-env NODE_ENV=test babel-node ./node_modules/istanbul/lib/cli.js cover test/index.js",
     "test:karma": "karma start test/karma.conf.js --single-run",
